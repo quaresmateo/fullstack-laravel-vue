@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->date('date');
             $table->integer('type')->unsigned();
             $table->text('description')->nullable();
-            $table->boolean('description')->nullable();
+            $table->boolean('check')->nullable();
             $table->timestamps();
         });
     }
