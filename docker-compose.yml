@@ -43,7 +43,7 @@ services:
       dockerfile: Dockerfile
     container_name: php_laravel
     volumes: 
-      - ./src:/home/www/html
+      - ./src:/var/www/html
     ports: 
       - "9004:9004"
     networks: 
