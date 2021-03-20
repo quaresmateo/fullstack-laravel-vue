@@ -35,7 +35,7 @@ services:
     networks: 
       - laravel
     volumes: 
-      - ./mysql:/var/lib/mysql
+      - ./mysql:/home/lib/mysql
     
   php:
     build: 
@@ -43,7 +43,7 @@ services:
       dockerfile: Dockerfile
     container_name: php_laravel
     volumes: 
-      - ./src:/var/www/html
+      - ./src:/home/www/html
     ports: 
       - "9004:9004"
     networks: 
