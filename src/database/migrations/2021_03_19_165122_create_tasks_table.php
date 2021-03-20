@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\ForeignKeyDefinition;
 use Illuminate\Support\Facades\Schema;
 
 class CreateTasksTable extends Migration
@@ -20,6 +21,11 @@ class CreateTasksTable extends Migration
             $table->text('description')->nullable();
             $table->boolean('check')->nullable();
             $table->timestamps();
+
+            $table->foreignId('type')
+                ->references('id')
+                ->on('types')
+                ->onDelete('cascade');
         });
     }
 
