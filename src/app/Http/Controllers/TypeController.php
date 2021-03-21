@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\type;
-use Facade\FlareClient\Http\Response;
+use App\Models\Type;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
