@@ -4,6 +4,12 @@ Required dependencies: [docker](https://www.docker.com/get-started) and [docker-
 Get started
 ====
 
+Up the containers
+
+```bash
+docker-compose up -d --build
+```
+
 Update Laravel dependencies
 
 ```bash
@@ -15,7 +21,7 @@ Give r/w permission to src folder
 sudo chmod -R 777 src 
 ```
 
-To use the `artesian` command on the terminal use, for example:
+To use the `artesian` command on the terminal use, for example, migrating tables to database:
 ```bash
-docker-compose run artisan make:migration task
+docker-compose run artisan migrate
 ```
