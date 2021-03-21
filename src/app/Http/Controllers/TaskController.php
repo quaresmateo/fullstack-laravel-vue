@@ -18,9 +18,9 @@ class TaskController extends Controller
         ]);
     }
 
-    public function show(Request $request, Response $response)
+    public function show(Request $request, Response $response, $id)
     {
-        $task = Task::find($request->id);
+        $task = Task::find($id);
 
         return response()->json([
             'data' => $task,
@@ -45,9 +45,9 @@ class TaskController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, Response $response)
+    public function destroy(Request $request, Response $response, $id)
     {
-        $task = Task::find($request->id);
+        $task = Task::find($id);
         $task->delete();
 
         return response()->json([

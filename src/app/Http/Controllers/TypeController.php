@@ -33,9 +33,9 @@ class TypeController extends Controller
         ]);
     }
 
-    public function show(Request $request, Response $response)
+    public function show(Request $request, Response $response, $id)
     {
-        $type = Type::find($request->id);
+        $type = Type::find($id);
 
         return response()->json([
             'data' => $type,
@@ -43,9 +43,9 @@ class TypeController extends Controller
         ]);
     }
 
-    public function update(Request $request, Response $response)
+    public function update(Request $request, Response $response, $id)
     {
-        $type = Type::find($request->id);
+        $type = Type::find($id);
 
         $type->name = $request->name;
 
@@ -57,9 +57,9 @@ class TypeController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, Response $response)
+    public function destroy(Request $request, Response $response, $id)
     {
-        $type = Type::find($request->id);
+        $type = Type::find($id);
         $type->delete();
 
         return response()->json([
