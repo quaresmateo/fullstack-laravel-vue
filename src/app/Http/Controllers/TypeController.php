@@ -47,7 +47,7 @@ class TypeController extends Controller
     {
         $type = Type::find($id);
 
-        $type->name = $request->name;
+        $type->name = $request->input('name', $type->name);
 
         $type->save();
 
