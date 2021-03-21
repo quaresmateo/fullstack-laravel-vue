@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\ForeignKeyDefinition;
 use Illuminate\Support\Facades\Schema;
 
 class CreateTasksTable extends Migration
@@ -14,18 +13,14 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('tasks');
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->date('date');
-            $table->integer('type')->unsigned();
+            $table->bigInteger('type');
             $table->text('description')->nullable();
             $table->boolean('check')->nullable();
             $table->timestamps();
-
-            $table->foreignId('type')
-                ->references('id')
-                ->on('types')
-                ->onDelete('cascade');
         });
     }
 
