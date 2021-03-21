@@ -3,83 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\type;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(Response $response)
     {
-        //
+        $types = Type::all();
+
+        return response()->json([
+            'data' => $types,
+            'message' => 'all types'
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request, Response $response)
     {
-        //
+        $type = new Type;
+
+        $type->name = $request->name;
+
+        $type->save();
+
+        return response()->json([
+            'message' => 'created!',
+            'status' => '201'
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show(Request $request, Response $response)
     {
-        //
+        $type = Type::find($request->id);
+
+        return response()->json([
+            'data' => $type,
+            'message' => 'created!'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function show(type $type)
+    public function update(Request $request, Response $response)
     {
-        //
+        $type = Type::find($request->id);
+
+        $type->name = $request->name;
+
+        $type->save();
+
+        return response()->json([
+            'data' => $type,
+            'message' => 'updated'
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(type $type)
+    public function destroy(Request $request, Response $response)
     {
-        //
-    }
+        $type = Type::find($request->id);
+        $type->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, type $type)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(type $type)
-    {
-        //
+        return response()->json([
+            'message' => 'deleted'
+        ]);
     }
 }
