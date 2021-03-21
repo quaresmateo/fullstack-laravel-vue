@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use Facade\FlareClient\Http\Response;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -12,7 +12,7 @@ class TaskController extends Controller
     {
         $tasks = Task::all();
 
-        $response()->json([
+        return response()->json([
             'data' => $tasks,
             'message' => 'all tasks'
         ]);
@@ -22,35 +22,35 @@ class TaskController extends Controller
     {
         $task = Task::find($request->id);
 
-        return $response()->json([
+        return response()->json([
             'data' => $task,
             'message' => 'created!'
         ]);
     }
 
-    public function update(Request $request, Response $response)
+    public function update(Request $request, Response $response, $id)
     {
-        $task = Task::find($request->id);
+        $task = Task::find($id);
 
-        $task->date = $request->date;
-        $task->type = $request->type;
-        $task->description = $request->description;
-        $task->check = $request->check;
+        $task->date = $request->input('date', $task->date);
+        $task->type = $request->input('type', $task->type);
+        $task->description = $request->input('description', $task->description);
+        $task->check = $request->input('check', $task->check);
 
         $task->save();
 
-        $response()->json([
+        return response()->json([
             'data' => $task,
             'message' => 'updated'
         ]);
     }
 
-    public function delete(Request $request, Response $response)
+    public function destroy(Request $request, Response $response)
     {
         $task = Task::find($request->id);
         $task->delete();
 
-        $response()->json([
+        return response()->json([
             'message' => 'deleted'
         ]);
     }
@@ -66,7 +66,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return $response()->json([
+        return response()->json([
             'message' => 'created!',
             'status' => '201'
         ]);
