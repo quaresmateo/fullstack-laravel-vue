@@ -13,6 +13,8 @@ services:
     volumes:
     - './frontend:/app'
     command: /bin/sh -c "npm run serve"
+    networks:
+      - laravel
 
 
   nginx: 
