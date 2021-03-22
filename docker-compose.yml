@@ -4,6 +4,17 @@ networks:
   laravel:
 
 services:
+  frontend:
+    build:
+      context: .
+      target: 'frontend'
+    ports:
+    - '8080:8080'
+    volumes:
+    - './frontend:/app'
+    command: /bin/sh -c "npm run serve"
+
+
   nginx: 
     image: nginx:stable-alpine
     container_name: nginx_laravel
@@ -40,7 +51,7 @@ services:
   php:
     build: 
       context: .
-      dockerfile: Dockerfile
+      target: 'backend'
     container_name: php_laravel
     volumes: 
       - ./src:/var/www/html
@@ -71,7 +82,7 @@ services:
   artisan:
     build: 
       context: .
-      dockerfile: Dockerfile
+      target: 'backend'
     container_name: artisan_laravel
     volumes: 
       - ./src:/var/www/html
